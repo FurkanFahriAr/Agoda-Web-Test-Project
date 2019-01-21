@@ -1,14 +1,13 @@
 package pageSteps;
 
 import com.thoughtworks.gauge.Step;
-import org.junit.Assert;
 import pages.HomePage;
 
 public class HomePageSteps {
     private static HomePage homePage = HomePage.getInstance();
 
     @Step("Enter Paris in the destination")
-    public void clickSignInButton() {
+    public void enterDestination() {
         homePage.enterSearchBox("Paris");
     }
 
@@ -17,14 +16,10 @@ public class HomePageSteps {
         homePage.clickautosuggestItem();
     }
 
-    @Step("Click check-in date")
-    public void clickcheckInday() {
-        homePage.clickcheckInday();
-    }
-
-    @Step("Click check-out date")
-    public void clickcheckOutday() {
-        homePage.clickcheckOutday();
+    @Step("Click checkin and out day")
+    public void clickcheckInOutDay() {
+        homePage.clickcheckInDay();
+        homePage.clickcheckOutDay();
     }
 
     @Step("Click family on the list")

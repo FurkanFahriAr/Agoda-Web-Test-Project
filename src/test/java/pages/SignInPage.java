@@ -1,14 +1,16 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-import utils.driver.BaseClass;
 
-public class SignInPage extends BaseClass {
+import pageElement.Button;
+import pageElement.PageElementModel;
+import pageElement.TextBox;
+
+public class SignInPage {
     private static SignInPage instance;
-    private static WebElement mobileTextBox = driver.findElementByCssSelector("[data-selenium=\"signin-mobile-input\"]");
-    private static WebElement passwordTextBox = driver.findElementByCssSelector("[data-selenium=\"signin-password-input\"]");
-    private static WebElement mobileTab = driver.findElementByCssSelector("[data-selenium=\"switcher-tab-mobile\"]");
-    private static WebElement loginButton = driver.findElementByCssSelector("[data-selenium=\"signin-mobile-button\"]");
+    private static TextBox mobileTextBox = new TextBox(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"signin-mobile-input\"]");
+    private static TextBox passwordTextBox = new TextBox(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"signin-mobile-password-input\"]");
+    private static Button mobileTab = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"switcher-tab-mobile\"]");
+    private static Button loginButton = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"signin-mobile-button\"]");
 
     public static synchronized SignInPage getInstance() {
         if (instance == null) {
@@ -18,18 +20,18 @@ public class SignInPage extends BaseClass {
     }
 
     public void entermobileTextBox(String keyword) {
-        mobileTextBox.sendKeys(keyword);
+        mobileTextBox.waitUntilVisibleAndType(keyword);
     }
 
     public void enterpasswordTextBox(String keyword) {
-        passwordTextBox.sendKeys(keyword);
+        passwordTextBox.waitUntilVisibleAndType(keyword);
     }
 
     public void clickmobileTab() {
-        mobileTab.click();
+        mobileTab.waitUntilVisibleAndClick();
     }
 
-    public void clickLoginButton() {
-        loginButton.click();
+    public void clickLoginButton() throws InterruptedException {
+        loginButton.clickAndWait();
     }
 }

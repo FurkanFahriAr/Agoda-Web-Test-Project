@@ -1,15 +1,14 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-import utils.driver.BaseClass;
+import pageElement.Button;
+import pageElement.PageElementModel;
+import pageElement.TextBox;
 
-public class HotelPages extends BaseClass {
+public class HotelPages {
     private static HotelPages instance;
-    private static WebElement maxPrice = driver.findElementByCssSelector("[id=\"price_box_1\"]");
-    private static WebElement hotelCard = driver.findElementsByCssSelector("[class=\"hotel-item-box\"]").get(0);
-    private static WebElement searchText = driver.findElementByCssSelector("[data-selenium=\"textInput\"]");
-    private static WebElement checkInText = driver.findElementByCssSelector("[data-selenium=\"checkInText\"]");
-    private static WebElement checkOutText = driver.findElementByCssSelector("[data-selenium=\"checkOutText\"]");
+    private static TextBox maxPrice = new TextBox(PageElementModel.selectorNames.XPATH, "//*[@id=\"price_box_1\"]");
+    private static Button hotelCard = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"hotel-info\"]");
+    private static Button searchText = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"textInput\"]");
 
     public static synchronized HotelPages getInstance() {
         if (instance == null) {
@@ -19,23 +18,12 @@ public class HotelPages extends BaseClass {
     }
 
     public void enterMaxPrice(String keyword) {
-        maxPrice.sendKeys(keyword);
+        maxPrice.clearText();
+        maxPrice.waitUntilVisibleAndType(keyword);
+        maxPrice.sendEnter();
     }
 
     public void clickHotelCard() {
-        hotelCard.click();
+        hotelCard.clickAndSwitchFocusTab();
     }
-
-    public String getTextSearchText() {
-        return searchText.getText();
-    }
-
-    public String getTextcheckInText() {
-        return checkInText.getText();
-    }
-
-    public String getTextcheckOutText() {
-        return checkOutText.getText();
-    }
-
 }

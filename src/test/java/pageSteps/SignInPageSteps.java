@@ -3,19 +3,20 @@ package pageSteps;
 import com.thoughtworks.gauge.Step;
 import pages.HomePage;
 import pages.SignInPage;
+
 public class SignInPageSteps {
     private static SignInPage signInPage = SignInPage.getInstance();
     private static HomePage homePage = HomePage.getInstance();
 
     @Step("Click signin button")
-    public void clickSignInButton() throws InterruptedException {
+    public void clickSignInButton() {
         homePage.clickSignIn();
-        wait(5);
     }
 
     @Step("Click mobile tab")
     public void clickMobileTab() {
-        signInPage.clickmobileTab(); }
+        signInPage.clickmobileTab();
+    }
 
     @Step("Enter number 5302426873 field")
     public void enterMobileNumber() {
@@ -28,7 +29,7 @@ public class SignInPageSteps {
     }
 
     @Step("Click login button")
-    public void clickLoginButton() {
+    public void clickLoginButton() throws InterruptedException {
         signInPage.clickLoginButton();
     }
 }

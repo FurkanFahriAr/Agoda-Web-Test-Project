@@ -1,24 +1,23 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import utils.driver.BaseClass;
+import pageElement.*;
 
-public class HomePage extends BaseClass {
+public class HomePage {
     private static HomePage instance;
-    private static WebElement searchBox = driver.findElementByCssSelector("[data-selenium=\"textInput\"]");
-    private static WebElement signInButton = driver.findElementByCssSelector("[data-selenium=\"sign-in\"]");
-    private static WebElement checkInBox = driver.findElementByCssSelector("[data-selenium=\"checkInBox\"]");
-    private static WebElement autosuggestItem = driver.findElementsByCssSelector("[data-selenium=\"autosuggest-item\"]").get(0);
-    private static WebElement checkInText = driver.findElementByCssSelector("[data-selenium=\"checkInText\"]");
-    private static WebElement checkOutText = driver.findElementByCssSelector("[data-selenium=\"checkOutText\"]");
-    private static WebElement occupancyBox = driver.findElementByCssSelector("[data-selenium=\"occupancyBox\"]");
-    private static WebElement travelerFamilies = driver.findElementByCssSelector("[data-selenium=\"traveler-families\"]");
-    private static WebElement plusChildren = driver.findElementByCssSelector("[data-element-name=\"occupancy-selector-panel-children\"]");
-    private static WebElement searchButton = driver.findElementByCssSelector("[data-selenium=\"searchButton\"]");
-    private static WebElement checkInday = driver.findElementsByCssSelector("[role=\"gridcell\"]").get(31);
-    private static WebElement checkOutday = driver.findElementsByCssSelector("[role=\"gridcell\"]").get(33);
-    private static Select dropDownChildAge = new Select(driver.findElementByCssSelector("[data-selenium=\"traveler-families\"]"));
+    private static Button signInButton = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"sign-in\"]");
+    private static Button checkInBox = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"checkInBox\"]");
+    private static Button autosuggestItem = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"autosuggest-item\"]");
+    private static Label checkInText = new Label(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"checkInText\"]");
+    private static Label checkOutText = new Label(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"checkOutText\"]");
+    private static Button occupancyBox = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"occupancyBox\"]");
+    private static Button travelerFamilies = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"traveler-families\"]");
+    private static Button plusChildren = new Button(PageElementModel.selectorNames.XPATH, "//*[@id=\"SearchBoxContainer\"]/div/div/div[5]/div/div/div/div[2]/div/div[3]/span[4]");
+    private static Button checkInDay = new Button(PageElementModel.selectorNames.XPATH, "//*[@aria-label=\"Fri Feb 01 2019\"]");
+    private static Button checkOutDay = new Button(PageElementModel.selectorNames.XPATH, "//*[@aria-label=\"Sun Feb 03 2019\"]");
+    private static Button searchButton = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"searchButton\"]");
+    private static Select dropDownChildAge = new Select(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"dropdownInput\"]");
+    private static TextBox searchBox = new TextBox(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"textInput\"]");
+
 
     public static synchronized HomePage getInstance() {
         if (instance == null) {
@@ -28,55 +27,47 @@ public class HomePage extends BaseClass {
     }
 
     public void enterSearchBox(String keyword) {
-        searchBox.sendKeys(keyword);
+        searchBox.waitUntilVisibleAndType(keyword);
     }
 
     public void clickSignIn() {
-        signInButton.click();
+        signInButton.waitUntilVisibleAndClick();
     }
 
-    public void clickcheckInBox() {
-        checkInBox.click();
+    public void clickcheckInDay() {
+        checkInDay.waitUntilVisibleAndClick();
     }
 
-    public void clickoccupancyBox() {
-        occupancyBox.click();
+    public void clickcheckOutDay() {
+        checkOutDay.waitUntilVisibleAndClick();
     }
 
     public void clicktravelerFamilies() {
-        travelerFamilies.click();
+        travelerFamilies.waitUntilVisibleAndClick();
     }
 
     public void clickplusChildren() {
-        plusChildren.click();
+        plusChildren.waitUntilVisibleAndClick();
     }
 
     public void clicksearchButton() {
-        searchButton.click();
-    }
-
-    public void clickcheckInday() {
-        checkInday.click();
+        searchButton.clickAndWait(10);
     }
 
     public void clickautosuggestItem() {
-        autosuggestItem.click();
-    }
-
-    public void clickcheckOutday() {
-        checkOutday.click();
+        autosuggestItem.waitUntilVisibleAndClick();
     }
 
     public void selectdropDownChildAge() {
-        dropDownChildAge.selectByIndex(5);
+        dropDownChildAge.selectByValue("5");
     }
 
-    public void getTextcheckInText() {
-        checkInText.click();
+    public String getTextcheckInText() {
+        return checkInText.getLabelText();
     }
 
-    public void getTextcheckOutText() {
-        checkOutText.click();
+    public String getTextcheckOutText() {
+        return checkOutText.getLabelText();
     }
 
 

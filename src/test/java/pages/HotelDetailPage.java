@@ -1,15 +1,12 @@
 package pages;
 
-import com.thoughtworks.gauge.Step;
-import org.openqa.selenium.WebElement;
-import utils.driver.BaseClass;
+import pageElement.Button;
+import pageElement.PageElementModel;
+import utils.driver.Driver;
 
-public class HotelDetailPage extends BaseClass {
+public class HotelDetailPage extends Driver {
     private static HotelDetailPage instance;
-    private static WebElement reseverNow = driver.findElementByCssSelector("[data-selenium=\"ChildRoomsList-bookButtonInput\"]");
-    private static WebElement searchText = driver.findElementByCssSelector("[data-selenium=\"textInput\"]");
-    private static WebElement chechInText = driver.findElementByCssSelector("[data-selenium=\"checkInText\"]");
-    private static WebElement checkOutText = driver.findElementByCssSelector("[data-selenium=\"checkOutText\"]");
+    private static Button reserveNow = new Button(PageElementModel.selectorNames.XPATH, "//*[@data-selenium=\"ChildRoomsList-bookButtonInput\"]");
 
     public static synchronized HotelDetailPage getInstance() {
         if (instance == null) {
@@ -17,21 +14,8 @@ public class HotelDetailPage extends BaseClass {
         }
         return instance;
     }
-
-    @Step("Click first deal in the list")
     public void clickReserveNow() {
-        reseverNow.click();
-    }
-
-    public String getTextSearchText() {
-        return searchText.getText();
-    }
-
-    public String getTextcheckInText() {
-        return chechInText.getText();
-    }
-
-    public String getTextcheckOutText() {
-        return checkOutText.getText();
+        reserveNow.scrollToElement();
+        reserveNow.waitUntilVisibleAndClick();
     }
 }
