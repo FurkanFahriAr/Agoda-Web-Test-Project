@@ -15,7 +15,6 @@ public class HotelDetailPage extends Driver {
         return instance;
     }
     public void clickReserveNow() {
-        reserveNow.scrollToElement();
         reserveNow.waitUntilVisibleAndClick();
     }
 }
